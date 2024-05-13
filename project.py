@@ -1,4 +1,5 @@
 import re
+from datetime import datetime
 
 def register():
     name = input("Введите ваше имя (от 6 до 30 символов, используйте буквы латинского алфавита, цифры и точки): ")
