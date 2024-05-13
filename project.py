@@ -9,8 +9,18 @@ def register():
     while not re.match(r'^[a-zA-Z0-9.]{6,30}$', surname):
         surname = input("Некорректная фамилия. Попробуйте снова: ")
 
-    birth_date = input("Введите вашу дату рождения в формате дд-мм-гггг: ")
-    # Дополнительные проверки для возраста могут быть добавлены
+    while True:
+        try:
+            birth_date = input("Введите вашу дату рождения в формате дд-мм-гггг: ")
+            birth_date_obj = datetime.strptime(birth_date, '%d-%m-%Y')
+            age = datetime.now().year - birth_date_obj.year
+            if age < 18 or age > 60:
+                print("Ваш возраст не подходит для регистрации. Вам должно быть от 18 до 60 лет.")
+            else:
+                print("Ваш возраст подходит для регистрации.")
+                break
+        except ValueError:
+            print("Некорректный формат даты. Попробуйте снова.")
 
     gender = input("Введите ваш пол (мужской или женский): ")
     while gender.lower() not in ['мужской', 'женский']:
