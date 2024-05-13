@@ -27,7 +27,32 @@ def register():
     while gender.lower() not in ['мужской', 'женский']:
         gender = input("Некорректный пол. Введите мужской или женский: ")
 
-    city = input("Введите ваш город: ")
+    available_cities = ["Москва", "Санкт-Петербург", "Кострома"]
+
+    def display_cities():
+        print("Доступные города:")
+        for index, city in enumerate(available_cities):
+            print(f"{index + 1}. {city}")
+        print("0. Другое")
+
+    def add_city():
+        new_city = input("Введите новый город: ")
+        available_cities.append(new_city)
+        print(f"Город {new_city} добавлен в список доступных городов")
+
+    while True:
+        display_cities()
+        choice = input("Выберите номер города из списка: ")
+        
+        if choice == "0":
+            add_city()
+        elif choice.isdigit() and 0 < int(choice) <= len(available_cities):
+            selected_city = available_cities[int(choice) - 1]
+            print("Вы выбрали город", selected_city)
+            break
+        else:
+            print("Некорректный выбор. Попробуйте снова.")
+
 
     email = input("Введите ваш email: ")
     while not re.match(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', email):
